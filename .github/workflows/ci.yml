@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Read PYTORCH_VERSION from file
+        id: pytorch_version
+        run: |
+          PYTORCH_VERSION=$(cat PYTORCH_VERSION.env)
+          echo "PYTORCH_VERSION=$PYTORCH_VERSION" >> $GITHUB_ENV
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
+          
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build Docker Image
+        run: |
+          docker buildx build \
+            --platform=linux/arm/v7 \
+            --progress=plain \
+            --output type=local,dest=./pytorch-${{ env.PYTORCH_VERSION }} \
+            --build-arg PYTORCH_VERSION=${{ env.PYTORCH_VERSION }} \
+            .
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: pytorch-${{ env.PYTORCH_VERSION }}
+          path: |
+            pytorch-${{ env.PYTORCH_VERSION }}/*.tar.gz
+
+
+
+
+
+
+
+

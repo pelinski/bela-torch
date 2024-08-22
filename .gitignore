@@ -1,0 +1,5 @@
+log
+dev.txt
+*log*
+armv7a-toolchain.cmake
+*xcomp*
