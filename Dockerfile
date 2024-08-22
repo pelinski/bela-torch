@@ -36,9 +36,9 @@ RUN mkdir -p /workspace/pytorch/build && cd /workspace/pytorch/build && \
     -DUSE_CUDA=OFF \
     -DUSE_NCCL=OFF \
     -DUSE_NNPACK=OFF \
-    -DUSE_PYTORCH_QNNPACK=ON \
-    -DUSE_QNNPACK=ON \
-    -DUSE_XNNPACK=ON \
+    -DUSE_PYTORCH_QNNPACK=OFF \
+    -DUSE_QNNPACK=OFF \
+    -DUSE_XNNPACK=OFF \
     -DUSE_MKLDNN=OFF \
     -DUSE_DISTRIBUTED=OFF \
     -DBUILD_TEST=OFF 
