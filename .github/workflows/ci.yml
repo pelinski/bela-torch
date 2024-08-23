@@ -15,7 +15,7 @@ jobs:
       - name: Read PYTORCH_VERSION from file
         id: pytorch_version
         run: |
-          PYTORCH_VERSION=$(cat PYTORCH_VERSION.env)
+          source PYTORCH_VERSION.env
           echo "PYTORCH_VERSION=$PYTORCH_VERSION" >> $GITHUB_ENV
 
       - name: Set up QEMU
