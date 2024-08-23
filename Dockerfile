@@ -8,18 +8,18 @@ RUN echo "running on $BUILDPLATFORM, building for $TARGETPLATFORM"
 
 WORKDIR /workspace
 
-# RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git
 
-# ARG PYTORCH_VERSION
-# RUN git clone --recursive --branch ${PYTORCH_VERSION} https://github.com/pytorch/pytorch.git
+ARG PYTORCH_VERSION
+RUN git clone --recursive --branch ${PYTORCH_VERSION} https://github.com/pytorch/pytorch.git
 
-# FROM debian:bullseye as builder
+FROM debian:bullseye as builder
 
-# RUN apt-get update && apt-get install -y \
-#     build-essential \
-#     cmake \
-#     python3 \
-#     python3-pip 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    python3 \
+    python3-pip 
 
 # FROM builder as pytorch-builder
 # COPY --from=downloader-python /workspace/pytorch /workspace/pytorch
