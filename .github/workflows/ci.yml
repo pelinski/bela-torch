@@ -40,7 +40,7 @@ jobs:
           docker buildx build \
             --platform=linux/arm/v7 \
             --progress=plain \
-            --output type=local,dest=./pytorch-${{ env.PYTORCH_VERSION }} \
+            --output type=tar,dest=pytorch-${{ env.PYTORCH_VERSION }}.tar.gz \
             --build-arg PYTORCH_VERSION=${{ env.PYTORCH_VERSION }} \
             .
 
@@ -54,7 +54,7 @@ jobs:
         with:
           name: pytorch-${{ env.PYTORCH_VERSION }}
           path: |
-            pytorch-${{ env.PYTORCH_VERSION }}/*.tar.gz
+            pytorch-${{ env.PYTORCH_VERSION }}.tar.gz
 
 
 

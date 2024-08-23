@@ -15,10 +15,10 @@ sudo apt install binfmt-support qemu qemu-user-static
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 ```
 
-After our prerequisites are done, we can compile pytorch by starting up the docker build process (be aware that it might take 2-3h to compile):
+After our prerequisites are done, we can compile pytorch by starting up the docker build process (be aware that it might take 3-4h to compile):
 
 ```bash
-docker buildx build --build-arg V_PYTORCH=main --platform=linux/arm/v7 --progress=plain --output type=local,dest=./pytorch-install .
+docker buildx build --build-arg PYTORCH_VERSION=main --platform=linux/arm/v7 --progress=plain --output type=tar,dest=pytorch-install.tar .
 ```
 
 ## Credits

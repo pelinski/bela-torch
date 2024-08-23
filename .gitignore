@@ -3,3 +3,5 @@ dev.txt
 *log*
 armv7a-toolchain.cmake
 *xcomp*
+*tar
+pytorch-install/*
