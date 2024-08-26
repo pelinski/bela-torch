@@ -46,7 +46,11 @@ RUN mkdir -p /workspace/pytorch/build && cd /workspace/pytorch/build && \
 
 RUN cd /workspace/pytorch/build && cmake --build . -j4
 
-RUN cd /workspace/pytorch/build && cmake install -d .
+RUN cd /workspace/pytorch/build && cmake --install . --prefix /workspace/pytorch/install --config Release
+
+ARG PYTORCH_VERSION
+RUN cd /workspace/pytorch/install && tar -czf /workspace/pytorch-${PYTORCH_VERSION}.tar.gz .
+
 
 # Set the entrypoint to bash so users can inspect the environment
 # ENTRYPOINT ["/bin/bash"]
