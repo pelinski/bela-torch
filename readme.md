@@ -1,4 +1,5 @@
 # bela-torch
+
 This repository contains a Dockerfile that builds pytorch for armv7. Instead of cross-compiling with a CMake toolchain, we use the official pytorch build system to build pytorch for armv7. This is done by using the `multiarch/qemu-user-static` docker image to emulate an armv7 environment.
 
 Note: I tried adding CI with Github Actions, but since the build takes over 6h, it gets killed even when using Docker cache, so the docker build has to be run locally.
@@ -34,6 +35,8 @@ rm -rf pytorch-install
 
 or alternatively, `./extract-pytorch-install.sh` will do the same.
 
+NOTE: If you have a good computer you can try speed up the build modifying the `-j` flag in the `Dockerfile` to a higher value. You can also try to increase the memory allocated to Docker in the settings. Be aware that errors related to lack of resources are not properly reported in the cmake output. If you increase the `-j` flag and get a cmake error without any message, try to reduce the value back to `-j1`.
 
 ## Credits
+
 This repo builds on top of https://github.com/rodrigodzf/bela-torch and https://github.com/XavierGeerinck/Jetson-Linux-PyTorch
