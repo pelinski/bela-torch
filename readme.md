@@ -41,6 +41,7 @@ NOTE: If you have a good computer you can try speed up the build modifying the `
 
 - [pybela-pytorch-xcompilation tutorial](https://github.com/pelinski/pybela-pytorch-xc-tutorial) - Tutorial on how integrate and crosscompile pytorch code for Bela
 - [bela-tflite](https://github.com/pelinski/bela-tflite) - Build TFLite for Bela using Docker
+- [bela-onnx](https://github.com/pelinski/bela-onnx) - Build onnx for Bela using Docker
 
 ## Credits
 
