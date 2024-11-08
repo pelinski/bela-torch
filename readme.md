@@ -24,7 +24,7 @@ After our prerequisites are done, we can compile pytorch by starting up the dock
 docker buildx build --build-arg PYTORCH_VERSION=main --platform=linux/arm/v7 --progress=plain --output type=tar,dest=pytorch-install.tar .
 ```
 
-This generates a `pytorch-install.tar` file that contains all the filesystem from the docker image. The packaged installation is in `workspace/pytorch/pytorch-${PYTORCH_VERSION}.tar.gz`. To extract the compiled pytorch, run the following commands:
+This generates a `pytorch-install.tar` file that contains all the filesystem from the docker image. The packaged installation is in `workspace/pytorch/pytorch-${PYTORCH_VERSION}.tar.gz`. To extract the built torch install, run the following commands:
 
 ```bash
 source PYTORCH_VERSION.env
@@ -40,7 +40,7 @@ NOTE: If you have a good computer you can try speed up the build modifying the `
 ## Also check
 
 - [pybela-pytorch-xcompilation tutorial](https://github.com/pelinski/pybela-pytorch-xc-tutorial) - Tutorial on how integrate and crosscompile pytorch code for Bela
-- [bela-tflite](https://github.com/pelinski/bela-tflite) - Build TFLite for Bela using Docker (+ precompiled binaries)
+- [bela-tflite](https://github.com/pelinski/bela-tflite) - Build TFLite for Bela using Docker
 
 ## Credits
 
