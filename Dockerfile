@@ -23,9 +23,13 @@ RUN apt-get update && apt-get install -y \
 FROM builder as pytorch-builder
 COPY --from=downloader-python /workspace/pytorch /workspace/pytorch
 
+# install cargo
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 RUN /bin/bash -c "source $HOME/.cargo/env && cd /workspace/pytorch && pip3 install -r requirements.txt"
+
+# fixes error c10::Scalar::Scalar(long long int)' cannot be overloaded with 'c10::Scalar::Scalar(int64_t)'
+RUN cd /workspace/pytorch/c10/core && grep -rl --include='*.h' '#if defined(__linux__) && !defined(__ANDROID__)' . | xargs sed -i '/#if defined(__linux__) && !defined(__ANDROID__)/,/#endif/ s/^/\/\//'
 
 # Configure and build LibTorch
 RUN mkdir -p /workspace/pytorch/build && cd /workspace/pytorch/build && \
